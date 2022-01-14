@@ -1,9 +1,18 @@
+$whole-line: 580px;
+$half-line: 290xpx;
+
 .inventoryPage {
   display: flex;
   width: 100%;
   height: 100%;
   color: white;
-  padding: 0 6rem;
+  padding: 0 12vw;
+  @media screen and (max-width: 700px) {
+    font-size: 4vw;
+    .formText {
+      font-size: 2.5vw;
+    }
+  }
 }
 
 .form {
@@ -20,8 +29,8 @@
   flex-direction: column;
   margin: 0.5rem 0;
   width: 70%;
-  min-width: 400px;
-  max-width: 700px;
+  min-width: $half-line;
+  max-width: $whole-line;
 }
 
 .textInput {
@@ -31,17 +40,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-  min-width: 400px;
-  max-width: 700px;
+  align-items: flex-end;
+  width: 70%;
+  min-width: $half-line;
+  max-width: $whole-line;
 }
 .formGroup2 {
   display: flex;
   flex-direction: column;
   width: 45%;
   margin: 0.5rem 0;
-  min-width: 200px;
-  max-width: 350px;
+  min-width: 0px;
+  max-width: $half-line;
 }
 
 .formGroup4 {
@@ -49,6 +59,5 @@
   flex-direction: column;
   width: 22.5%;
   margin: 0.5rem 0;
-  min-width: 100px;
-  max-width: 1750px;
+  max-width: $whole-line;
 }
