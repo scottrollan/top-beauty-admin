@@ -21,6 +21,7 @@ $half-line: 290xpx;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  padding: 1rem 1rem 2rem 1rem;
 }
 
 .formGroup1 {
@@ -57,7 +58,20 @@ $half-line: 290xpx;
 .formGroup4 {
   display: flex;
   flex-direction: column;
-  width: 22.5%;
+  width: 20%;
   margin: 0.5rem 0;
   max-width: $whole-line;
+  @media screen and (max-width: 800px) {
+    font-size: 3vw;
+  }
+}
+
+.imagesArray {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: $whole-line;
+}
+.deleteMe {
 }

@@ -1,6 +1,11 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
 
 const firebaseApp = initializeApp({
   apiKey: 'AIzaSyBvy8d4VGvdvghWrpvbI_v-_Xan9ur2Nh0',
@@ -12,23 +17,20 @@ const firebaseApp = initializeApp({
 });
 
 const firestore = getFirestore();
-const storage = getStorage();
 
 //Storage references//
-const imagesRef = ref(storage, 'images');
+const storage = getStorage();
 
-export const uploadImage = (file, name) => {
-  uploadBytes(imagesRef, file).then((snapshot) => {
-    console.log(`${name} ------- ${JSON.stringify(snapshot)}`);
+export const uploadImage = (file) => {
+  const storageRef = ref(storage, `images/${file.name}`);
+  return new Promise((resolve) => {
+    uploadBytesResumable(storageRef, file).then(() => {
+      getDownloadURL(storageRef).then((url) => {
+        const downloadURL = url;
+        resolve(downloadURL);
+      });
+    });
   });
 };
 
-export const addInventoryItem = async () => {
-  let items = [];
-  const querySnapshot = await getDocs(collection(firestore, 'inventory-items'));
-  querySnapshot.forEach((item) => {
-    items = [...items, { ...item.data() }];
-  });
-
-  return items;
-};
+export const addInventoryItem = async (item) => {};

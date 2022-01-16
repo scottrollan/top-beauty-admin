@@ -1,5 +1,5 @@
 import logo from './assets/tb.png';
-import InventoryInput from './components/InventoryInput';
+import AddItem from './pages/AddItem';
 import styles from './App.module.scss';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
         <img src={logo} className={styles.appLogo} alt="logo" />
         Top Beauty Admin Page
       </header>
-      <InventoryInput />
+      <AddItem />
     </div>
   );
 }
