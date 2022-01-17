@@ -1,8 +1,12 @@
 .App {
+  width: 100vw;
   min-width: 100vw;
   min-height: 100vh;
   background-color: #282c34;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .appLogo {

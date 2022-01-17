@@ -20,7 +20,7 @@ $half-line: 290xpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 1rem 1rem 2rem 1rem;
 }
 
@@ -41,6 +41,7 @@ $half-line: 290xpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: flex-end;
   width: 70%;
   min-width: $half-line;
@@ -59,6 +60,7 @@ $half-line: 290xpx;
   display: flex;
   flex-direction: column;
   width: 20%;
+  min-width: 80px;
   margin: 0.5rem 0;
   max-width: $whole-line;
   @media screen and (max-width: 800px) {
@@ -72,6 +74,7 @@ $half-line: 290xpx;
   flex-wrap: wrap;
   justify-content: space-evenly;
   width: $whole-line;
+  max-width: 70vw;
 }
 .deleteMe {
 }
