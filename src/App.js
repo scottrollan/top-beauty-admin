@@ -1,5 +1,6 @@
 import logo from './assets/tb.png';
 import AddItem from './pages/AddItem';
+import UpdateItem from './pages/UpdateItem';
 import styles from './App.module.scss';
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
         <img src={logo} className={styles.appLogo} alt="logo" />
         Top Beauty Admin Page
       </header>
-      <AddItem />
+      {/* <AddItem /> */}
+      <UpdateItem />
     </div>
   );
 }

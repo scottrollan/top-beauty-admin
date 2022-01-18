@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { uploadImage } from '../firestore/index';
+import { uploadImage, deleteImage } from '../firestore/index';
 import SaveItemModal from './SaveItemModal';
 import styles from './InventoryForm.module.scss';
 
@@ -12,19 +12,21 @@ export default function InventoryInput({ item, setItem, title }) {
     setItem({ ...item, [key]: value });
   };
 
-  const deleteImage = (idx) => {
-    imagesArray.splice(idx, 1);
-    setImagesArray([...imagesArray]);
-  };
-
   const addNewImage = async (file) => {
+    const fileName = file.name;
     try {
       const url = await uploadImage(file);
-      console.log(url);
-      setImagesArray([...imagesArray, url]);
+      setImagesArray([...imagesArray, { url: url, name: fileName }]);
     } catch (error) {
       console.log(error.message);
     }
+    window.document.getElementById('images').value = '';
+  };
+
+  const removeImage = (idx, image) => {
+    imagesArray.splice(idx, 1);
+    setImagesArray([...imagesArray]);
+    deleteImage(image);
   };
 
   const saveItem = (event) => {
@@ -175,7 +177,7 @@ export default function InventoryInput({ item, setItem, title }) {
               imagesArray.map((img, idx) => {
                 return (
                   <span
-                    key={`${idx}${img}`}
+                    key={`${idx}${img.name}`}
                     style={{
                       width: `calc($whole-line / ${imagesArray.length} - 16px)`,
                       maxWidth: '30%',
@@ -183,7 +185,7 @@ export default function InventoryInput({ item, setItem, title }) {
                       position: 'relative',
                     }}
                   >
-                    <img src={img} alt="error" style={{ width: '100%' }} />
+                    <img src={img.url} alt="error" style={{ width: '100%' }} />
                     <div
                       style={{
                         position: 'absolute',
@@ -191,7 +193,7 @@ export default function InventoryInput({ item, setItem, title }) {
                         right: '-8px',
                         cursor: 'pointer',
                       }}
-                      onClick={() => deleteImage(idx)}
+                      onClick={() => removeImage(idx, img)}
                     >
                       <i
                         className={[`fad fa-times-circle fa-2x`]}
