@@ -30,15 +30,15 @@ const firebaseApp = initializeApp({
 export const db = getFirestore();
 
 export const getAllInventory = () => {
-  return new Promise((resolve) => {
-    const q = query(collection(db, 'inventory-items'));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      resolve(items);
+  // return new Promise((resolve) => {
+  const q = query(collection(db, 'inventory-items'));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    let items = [];
+    querySnapshot.forEach((doc) => {
+      items.push(doc.data());
     });
+    //   resolve(items);
+    // });
   });
 };
 

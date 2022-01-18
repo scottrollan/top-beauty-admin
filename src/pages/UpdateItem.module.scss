@@ -1,8 +1,24 @@
+.updatePage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: 0 12vw;
+  @media screen and (max-width: 700px) {
+    font-size: 3vw;
+    .formText {
+      font-size: 2.5vw;
+    }
+  }
+}
+
 .itemLine {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   color: white;
+  margin: 1rem 0;
 }
 
 .col1 {
