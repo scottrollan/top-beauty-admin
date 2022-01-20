@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { uploadImage, deleteImage } from '../firestore/index';
 import SaveItemModal from './SaveItemModal';
 import styles from './InventoryForm.module.scss';
 
-export default function InventoryInput({ item, setItem, title }) {
+export default function InventoryInput({ thisItem, title }) {
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [imagesArray, setImagesArray] = useState([]);
+  const [item, setItem] = useState({});
 
   const changeValue = (key, value) => {
     setItem({ ...item, [key]: value });
@@ -34,7 +35,11 @@ export default function InventoryInput({ item, setItem, title }) {
     setItem({ ...item, images: [...imagesArray] });
     setShowSaveModal(true);
   };
-
+  useEffect(() => {
+    setItem({ ...thisItem });
+    const iArray = thisItem.images;
+    setImagesArray([...iArray]);
+  }, []);
   return (
     <>
       <SaveItemModal
@@ -45,14 +50,24 @@ export default function InventoryInput({ item, setItem, title }) {
       />
       <div className={styles.inventoryPage}>
         <Form className={styles.form} onSubmit={saveItem}>
+          <h3>{title}</h3>
+
           <Form.Group className={styles.formGroup1} controlId="name">
-            <Form.Label>New Item Name</Form.Label>
+            <Form.Label>Item Name</Form.Label>
             <Form.Control
               className={styles.textInput}
               required
               placeholder="product name"
-              value={item.name}
+              value={item.name ?? ''}
               onChange={(e) => changeValue('name', e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className={styles.formGroup1} controlId="inventoryId">
+            <Form.Label>Inventory Number</Form.Label>
+            <Form.Control
+              className={styles.textInput}
+              value={item.inventoryId ?? ''}
+              disabled
             />
           </Form.Group>
           <Form.Group className={styles.formGroup1} controlId="brand">
@@ -61,7 +76,7 @@ export default function InventoryInput({ item, setItem, title }) {
               className={styles.textInput}
               required
               placeholder="brand name"
-              value={item.brand}
+              value={item.brand ?? ''}
               onChange={(e) => changeValue('brand', e.target.value)}
             />
           </Form.Group>
@@ -71,7 +86,7 @@ export default function InventoryInput({ item, setItem, title }) {
               className={styles.textInput}
               as="textarea"
               rows={4}
-              value={item.description}
+              value={item.description ?? ''}
               onChange={(e) => changeValue('description', e.target.value)}
             />
           </Form.Group>
@@ -80,14 +95,14 @@ export default function InventoryInput({ item, setItem, title }) {
               <Form.Label>Item Size (if any)</Form.Label>
               <Form.Control
                 className={styles.textInput}
-                value={item.size}
+                value={item.size ?? ''}
                 onChange={(e) => changeValue('size', e.target.value)}
               />
             </Form.Group>
             <Form.Group className={styles.formGroup2} controlId="color">
               <Form.Label>Item Color (if any)</Form.Label>
               <Form.Control
-                value={item.color}
+                value={item.color ?? ''}
                 onChange={(e) => changeValue('color', e.target.value)}
                 className={styles.textInput}
               />
@@ -97,7 +112,7 @@ export default function InventoryInput({ item, setItem, title }) {
             <Form.Group className={styles.formGroup2} controlId="category">
               <Form.Label>Category</Form.Label>
               <Form.Control
-                value={item.category}
+                value={item.category ?? ''}
                 onChange={(e) => changeValue('category', e.target.value)}
                 className={styles.textInput}
               />
@@ -108,7 +123,7 @@ export default function InventoryInput({ item, setItem, title }) {
             >
               <Form.Label>Wholesale Supplier Name</Form.Label>
               <Form.Control
-                value={item.wholesaleSupplier}
+                value={item.wholesaleSupplier ?? ''}
                 onChange={(e) =>
                   changeValue('wholesaleSupplier', e.target.value)
                 }
@@ -126,7 +141,7 @@ export default function InventoryInput({ item, setItem, title }) {
                 className={styles.textInput}
                 type="number"
                 step="0.01"
-                value={item.wholesalePrice}
+                value={item.wholesalePrice ?? ''}
                 onChange={(e) => changeValue('wholesalePrice', e.target.value)}
               />
             </Form.Group>
@@ -137,7 +152,7 @@ export default function InventoryInput({ item, setItem, title }) {
                 type="number"
                 required
                 step="0.01"
-                value={item.retailPrice}
+                value={item.retailPrice ?? ''}
                 onChange={(e) => changeValue('retailPrice', e.target.value)}
               />
             </Form.Group>
@@ -149,7 +164,7 @@ export default function InventoryInput({ item, setItem, title }) {
               <Form.Control
                 className={styles.textInput}
                 type="number"
-                value={item.quantityInStock}
+                value={item.quantityInStock ?? ''}
                 onChange={(e) => changeValue('quantityInStock', e.target.value)}
               />
             </Form.Group>
@@ -159,7 +174,7 @@ export default function InventoryInput({ item, setItem, title }) {
                 className={styles.textInput}
                 placeholder="Set re-order alert when stock goes down to this number"
                 type="number"
-                value={item.lowStockAlert}
+                value={item.lowStockAlert ?? ''}
                 onChange={(e) => changeValue('lowStockAlert', e.target.value)}
               />
             </Form.Group>

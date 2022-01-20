@@ -1,10 +1,8 @@
 .updatePage {
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100%;
   color: white;
-  padding: 0 12vw;
   @media screen and (max-width: 700px) {
     font-size: 3vw;
     .formText {
@@ -13,14 +11,32 @@
   }
 }
 
+.headerLine,
 .itemLine {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-  color: white;
-  margin: 1rem 0;
+  margin: 1rem;
+}
+.headerLine {
+  flex-direction: column;
+  text-align: center;
+}
+.itemLine {
+  flex-direction: row;
 }
 
-.col1 {
+.toggleEdit {
   color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  :hover {
+    color: green;
+  }
+}
+
+.updateDiv {
+  display: none;
 }

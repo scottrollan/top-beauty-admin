@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InventoryForm from '../components/InventoryForm';
+import { createRandomString } from '../functions/CreateRandomString';
 
 export default function AddItem() {
-  const [newItem, setNewItem] = useState({
+  const newItem = {
     brand: '',
     category: '',
     images: [],
-    inventoryId: '',
+    inventoryId: createRandomString(20),
     name: '',
     description: '',
     size: '',
@@ -16,14 +17,10 @@ export default function AddItem() {
     wholesalePrice: 0,
     retailPrice: 0,
     wholesaleSupplier: '',
-  });
+  };
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <InventoryForm
-        item={newItem}
-        setItem={setNewItem}
-        title="Add New Inventory Item"
-      />
+      <InventoryForm thisItem={newItem} title="Add New Inventory Item" />
     </div>
   );
 }

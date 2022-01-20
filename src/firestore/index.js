@@ -42,8 +42,8 @@ export const getAllInventory = () => {
   });
 };
 
-export const getInventoryItemById = async (item) => {
-  const docRef = doc(db, 'inventory-items', item.inventoryId);
+export const getInventoryItemById = async (id) => {
+  const docRef = doc(db, 'inventory-items', id);
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {

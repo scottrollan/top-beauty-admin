@@ -2,14 +2,11 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { saveInventoryItem } from '../firestore/index';
-import { createRandomString } from '../functions/CreateRandomString';
 import styles from './SaveItemModal.module.scss';
 
 export default function SaveItemModal({ title, item, show, setShow }) {
   const saveToFirestore = () => {
-    const newIdNum = createRandomString(20);
-    const saveItem = { ...item, inventoryId: newIdNum };
-
+    const saveItem = { ...item };
     Object.keys(saveItem).forEach((key) => {
       if (saveItem[key] === '' || !saveItem[key]) {
         delete saveItem[key];
@@ -18,6 +15,8 @@ export default function SaveItemModal({ title, item, show, setShow }) {
     console.log(saveItem);
     saveInventoryItem(saveItem);
   };
+
+  const itemImages = item.images ?? [];
   return (
     <Modal
       title={title}
@@ -72,7 +71,7 @@ export default function SaveItemModal({ title, item, show, setShow }) {
           </span>
         </p>
         <div>
-          {item.images.map((img, idx) => {
+          {itemImages.map((img, idx) => {
             return (
               <img
                 key={`${idx}${img.name}`}

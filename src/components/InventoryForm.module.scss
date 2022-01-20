@@ -1,12 +1,14 @@
 $whole-line: 580px;
 $half-line: 290xpx;
+// $whole-line: 100%;
+// $half-line: 50%;
 
 .inventoryPage {
   display: flex;
   width: 100%;
   height: 100%;
   color: white;
-  padding: 0 12vw;
+  margin: 1rem 0;
   @media screen and (max-width: 700px) {
     font-size: 4vw;
     .formText {
@@ -25,7 +27,6 @@ $half-line: 290xpx;
 }
 
 .formGroup1 {
-  width: 100%;
   display: flex;
   flex-direction: column;
   margin: 0.5rem 0;
@@ -40,8 +41,8 @@ $half-line: 290xpx;
 .formGroupWrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: space-between;
   align-items: flex-end;
   width: 70%;
   min-width: $half-line;
@@ -73,8 +74,8 @@ $half-line: 290xpx;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  width: $whole-line;
-  max-width: 70vw;
+  // width: $whole-line;
+  // max-width: 70vw;
 }
 .deleteMe {
 }

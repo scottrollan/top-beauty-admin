@@ -8,10 +8,10 @@ function App() {
     <div className={styles.App}>
       <header className={styles.appHeader}>
         <img src={logo} className={styles.appLogo} alt="logo" />
-        Top Beauty Admin Page
+        Top Beauty Admin
       </header>
-      {/* <AddItem /> */}
       <UpdateItem />
+      <AddItem />
     </div>
   );
 }
